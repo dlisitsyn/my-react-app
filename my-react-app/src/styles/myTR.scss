@@ -1,0 +1,85 @@
+@import "./shared.scss";
+
+@mixin kebab-dot() {
+  width: 4px;
+  height: 4px;
+  border-radius: 100%;
+  background-color: #4D4D4D;
+}
+
+@mixin kebab-dot-pseudo() {
+  display: block;
+  position: absolute;
+  content: '';
+}
+
+.button {
+  padding: 18px 30px;
+  border: none;
+  border-radius: 3px;
+  background-color: #ff8000;
+  color: #fff;
+  outline: none;
+}
+
+.LinkButton {
+  margin: 0 10px;
+  padding: 0.3em 1em;
+  border-radius: 42px;
+  line-height: 1em;
+  border: solid 1px #4D4D4D;
+  text-decoration: none;
+  color: #000;
+}
+
+th {
+  text-transform: uppercase;
+}
+
+.table--row {
+  box-shadow: 0 0 30px 0 rgba(0,0,0,0.1);
+  border-collapse: collapse;
+}
+
+.table--row {
+  td {
+    // display: flex;
+    // align-items: center;
+
+    padding: 10px;
+    border-top: solid 1px #EAEAEA;
+    &:first-child {
+      border-left: solid 1px red;
+      //padding-left: 20px;
+    }
+  }
+}
+
+.table--row__dueToday {
+  background-color: #F7FCFE;
+}
+
+.table--row__pastDue {
+  background-color: #FEF8F8;
+}
+
+.kebab {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  @include kebab-dot;
+
+  &:before {
+    top: -6px;
+    left: 0;
+    @include kebab-dot;
+    @include kebab-dot-pseudo;
+  }
+
+  &:after {
+    bottom: -6px;
+    left: 0;
+    @include kebab-dot;
+    @include kebab-dot-pseudo;
+  }
+}
