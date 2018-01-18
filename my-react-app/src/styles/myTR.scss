@@ -43,14 +43,11 @@ th {
 
 .table--row {
   td {
-    // display: flex;
-    // align-items: center;
 
     padding: 10px;
     border-top: solid 1px #EAEAEA;
     &:first-child {
       border-left: solid 1px red;
-      //padding-left: 20px;
     }
   }
 }

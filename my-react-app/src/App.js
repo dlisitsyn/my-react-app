@@ -17,19 +17,21 @@ class App extends Component {
         </p>
         <form action="#" method="POST">
           <fieldset>
-          <table border="0" cellspacing="0" cellpadding="0">
+          <table border="0" cellSpacing="0" cellPadding="0">
             <caption>Billing and Invoices</caption>
             <thead>
-              <th scope="col">Invoce</th>
-              <th scope="col">Title</th>
-              <th scope="col">Issued</th>
-              <th scope="col">Status</th>
-              <th scope="col">Amount</th>
-              <th scope="col"></th>
+              <tr>
+                <th scope="col">Invoce</th>
+                <th scope="col">Title</th>
+                <th scope="col">Issued</th>
+                <th scope="col">Status</th>
+                <th scope="col">Amount</th>
+                <th scope="col"></th>
+              </tr>
             </thead>
             <tbody>
-              <TableRow dueDate="today"/>
-              <TableRow dueDate=""/>
+              <TableRow dueDate={Date('January 11, 2018 00:00:00')}/>
+              <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
             </tbody>
           </table>
           </fieldset>
