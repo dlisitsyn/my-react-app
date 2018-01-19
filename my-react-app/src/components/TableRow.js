@@ -3,6 +3,7 @@ import LinkButton from './LinkButton';
 import CheckBox from './CheckBox';
 import Kebab from './Kebab';
 import Tooltip from './Tooltip';
+import helpIcon from '../img/help-icon.png';
 
 class TableRow extends Component {
 
@@ -32,7 +33,7 @@ class TableRow extends Component {
         <td><CheckBox/>1003453462</td>
         <td>Finance US. New Sale</td>
         <td>03 Jul 2017</td>
-        <td>Past Due <Tooltip text="Some really confusing message." ></Tooltip></td>
+        <td>Past Due <Tooltip text="Some long annoying meaningless silly message." image={helpIcon}></Tooltip></td>
         <td>5 days ago</td>
         <td>USD 1,456.65 <LinkButton text="Pay"/><Kebab/></td>
       </tr>
