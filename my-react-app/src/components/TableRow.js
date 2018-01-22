@@ -11,15 +11,10 @@ class TableRow extends Component {
     let ddClasses = '';
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    //dueDate.setHours(0, 0, 0, 0);
-
-    console.log("today " + today);
-    console.log("due " + dueDate);
 
     if (dueDate === today) {
       ddClasses = 'table--row__dueToday';
     }
-    //'table--row__pastDue';
 
     return ddClasses;
   }
@@ -30,7 +25,11 @@ class TableRow extends Component {
 
     return (
       <tr className={"table--row " + dueDateClasses}>
-        <td><CheckBox/>1003453462</td>
+        <td>
+          <Tooltip text="We could be tooltips just for one day." image={helpIcon}></Tooltip>
+          <CheckBox/>
+          1003453462
+        </td>
         <td>Finance US. New Sale</td>
         <td>03 Jul 2017</td>
         <td>Past Due <Tooltip text="Some long annoying meaningless silly message." image={helpIcon}></Tooltip></td>

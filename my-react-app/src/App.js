@@ -32,6 +32,11 @@ class App extends Component {
             <tbody>
               <TableRow dueDate={Date('January 11, 2018 00:00:00')}/>
               <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
+              <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
+              <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
+              <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
+              <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
+              <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
             </tbody>
           </table>
           </fieldset>

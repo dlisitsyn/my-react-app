@@ -1,14 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-
-var getTooltipWidth = text => {
-  const charsPerLine = 50;
-  const charWIdth = 5;
-  const textLength = text.length;
-  const numOfLInes = Math.ceil(parseFloat(textLength / charsPerLine));
-
-  return numOfLInes === 1 ? textLength * charWIdth : 250;
-}
 
 const StyledInfoIconWrapper = styled.div`
   display: inline-block;
@@ -74,17 +65,65 @@ const StyledTooltipText = styled.div`
 
     transform: rotate(45deg);
   }
+
+  &.moveRight:after {
+    left: 10%;
+  }
 `;
 
-function Tooltip(props) {
-  let ttWidth = getTooltipWidth(props.text);
+class Tooltip extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      closeToEdgeX: false,
+      closeToEdgeY: false
+    };
 
-  return (
-    <StyledInfoIconWrapper>
-      <StyledInfoIcon src={props.image} alt="help"></StyledInfoIcon>
-      <StyledTooltipText style={{width: ttWidth+'px'}} className="tooltip">{props.text}</StyledTooltipText>
-    </StyledInfoIconWrapper>
-  );
+    this.getTooltipWidth = this.getTooltipWidth.bind(this);
+    this.handleHover = this.handleHover.bind(this);
+    this.adjustTooltipPosition = this.adjustTooltipPosition.bind(this);
+  }
+
+  maxTooltipWidth = 360;
+
+  getTooltipWidth = () => {
+    const charsPerLine = 50;
+    const charWIdth = 5;
+    const textLength = this.props.text.length;
+    const numOfLInes = Math.ceil(parseFloat(textLength / charsPerLine));
+
+    return numOfLInes === 1 ? textLength * charWIdth : this.maxTooltipWidth;
+  };
+
+  adjustTooltipPosition = () => {
+    this.setState({
+      closeToEdgeX: true
+    });
+  };
+
+  handleHover = (e) => {
+    if (e.clientY < 100) {
+      e.target.classNames += " hasTooltipBelow";
+    }
+
+    if (e.clientX <= this.maxTooltipWidth / 2) {
+      this.adjustTooltipPosition();
+    }
+  }
+
+  render() {
+    let textColour = this.state.closeToEdgeX ? 'red' : 'black';
+    let moveXClass = this.state.closeToEdgeX ? 'moveRight' : 'moveLeft';
+    let moveX = this.state.closeToEdgeX ? 'translateX(-10%)' : 'translateX(-50%)';
+
+
+    return (
+      <StyledInfoIconWrapper onMouseEnter={this.handleHover}>
+        <StyledInfoIcon src={this.props.image} alt="help"></StyledInfoIcon>
+        <StyledTooltipText style={{width: this.getTooltipWidth()+'px', color: textColour, transform: moveX}} className={"tooltip " + moveXClass}>{this.props.text}</StyledTooltipText>
+      </StyledInfoIconWrapper>
+    );
+  }
 }
 
 export default Tooltip;
