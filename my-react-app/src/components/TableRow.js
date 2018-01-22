@@ -34,7 +34,12 @@ class TableRow extends Component {
         <td>03 Jul 2017</td>
         <td>Past Due <Tooltip text="Some long annoying meaningless silly message." image={helpIcon}></Tooltip></td>
         <td>5 days ago</td>
-        <td>USD 1,456.65 <LinkButton text="Pay"/><Kebab/></td>
+        <td>
+          USD 1,456.65
+          <LinkButton text="Pay"/>
+          <Kebab/>
+          <Tooltip text="I'm really close to being far right." image={helpIcon}></Tooltip>
+        </td>
       </tr>
     );
   }

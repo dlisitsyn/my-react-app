@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+const shadowColor = 'rgba(0,0,0,0.2)';
+
 const StyledInfoIconWrapper = styled.div`
   display: inline-block;
   position: relative;
@@ -20,12 +22,19 @@ const StyledInfoIcon = styled.img`
 const StyledTooltipText = styled.div`
   display: block;
   position: absolute;
+  z-index: 10;
   box-sizing: border-box;
   bottom: 100%;
   transform: translateX(-50%); // align with icon
   left: 50%;
 
   margin-bottom: 10px;
+
+  &.moveDown {
+    top: 120%;
+    bottom: auto;
+  }
+
   padding: 10px;
   border: solid 1px #DDD;
   border-radius: 4px;
@@ -33,13 +42,14 @@ const StyledTooltipText = styled.div`
   background: #FFF;
   color: #4D4D4D;
   opacity: 0;
-  box-shadow: 5px 5px 4px 0 rgba(0,0,0,0.2);
+  box-shadow: 5px 5px 4px 0 ${shadowColor};
 
   pointer-events: none;
 
   &:before {
     display: block;
     position: absolute;
+    z-index: 10;
     width: 100%;
     height: 20px;
     bottom: -20px;
@@ -61,7 +71,7 @@ const StyledTooltipText = styled.div`
     border-left: solid 12px #FFF;
     border-bottom: solid 12px #FFF;
     content: " ";
-    box-shadow: 5px 5px 4px 0 rgba(0,0,0,0.2);
+    box-shadow: 5px 5px 4px 0 ${shadowColor};
 
     transform: rotate(45deg);
   }
@@ -69,19 +79,31 @@ const StyledTooltipText = styled.div`
   &.moveRight:after {
     left: 10%;
   }
+
+  &.moveLeft:after {
+    left: 90%;
+  }
+
+  &.moveDown:after {
+    top: -10%;
+    box-shadow: none;
+    border-top: solid 1px ${shadowColor};
+    border-right: solid 1px ${shadowColor};
+    transform: rotate(-45deg);
+  }
 `;
 
 class Tooltip extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      closeToEdgeX: false,
-      closeToEdgeY: false
+      closeToLeftEdge: false,
+      closeToRightEdge: false,
+      closeToTop: false
     };
 
     this.getTooltipWidth = this.getTooltipWidth.bind(this);
     this.handleHover = this.handleHover.bind(this);
-    this.adjustTooltipPosition = this.adjustTooltipPosition.bind(this);
   }
 
   maxTooltipWidth = 360;
@@ -95,32 +117,46 @@ class Tooltip extends Component {
     return numOfLInes === 1 ? textLength * charWIdth : this.maxTooltipWidth;
   };
 
-  adjustTooltipPosition = () => {
-    this.setState({
-      closeToEdgeX: true
-    });
-  };
-
   handleHover = (e) => {
-    if (e.clientY < 100) {
-      e.target.classNames += " hasTooltipBelow";
-    }
+    this.setState({
+      closeToTop: e.clientY < 100 ? true : false
+    });
 
-    if (e.clientX <= this.maxTooltipWidth / 2) {
-      this.adjustTooltipPosition();
-    }
+    this.setState({
+      closeToLeftEdge: e.clientX <= this.maxTooltipWidth / 2 ? true : false
+    });
+
+    this.setState({
+      closeToRightEdge: (document.body.clientWidth - e.clientX) <= this.maxTooltipWidth / 2 ? true : false
+    });
   }
 
   render() {
-    let textColour = this.state.closeToEdgeX ? 'red' : 'black';
-    let moveXClass = this.state.closeToEdgeX ? 'moveRight' : 'moveLeft';
-    let moveX = this.state.closeToEdgeX ? 'translateX(-10%)' : 'translateX(-50%)';
+    let moveXClass = '';
+    let moveYClass = '';
+    let transformStyle = '';
 
+    if (this.state.closeToLeftEdge) {
+      moveXClass = 'moveRight';
+      transformStyle = 'translateX(-10%)';
+    } else if (this.state.closeToRightEdge) {
+      moveXClass = 'moveLeft';
+      transformStyle = 'translateX(-90%)';
+    } else {
+      transformStyle = 'translateX(-50%)'; // default position - horizontally aligned with the trigger
+    }
+
+    if (this.state.closeToTop) {
+      moveYClass ='moveDown';
+      transformStyle += '';
+    } else {
+
+    }
 
     return (
       <StyledInfoIconWrapper onMouseEnter={this.handleHover}>
         <StyledInfoIcon src={this.props.image} alt="help"></StyledInfoIcon>
-        <StyledTooltipText style={{width: this.getTooltipWidth()+'px', color: textColour, transform: moveX}} className={"tooltip " + moveXClass}>{this.props.text}</StyledTooltipText>
+        <StyledTooltipText style={{width: this.getTooltipWidth()+'px', transform: transformStyle}} className={"tooltip " + moveXClass + " " + moveYClass}>{this.props.text}</StyledTooltipText>
       </StyledInfoIconWrapper>
     );
   }
