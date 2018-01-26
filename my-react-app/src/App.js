@@ -28,12 +28,12 @@ class App extends Component {
               </tr>
             </thead>
             <tbody>
-              <TableRow dueDate={new Date('2018, 1, 24')}/>
+              <TableRow dueDate={new Date('2018, 1, 24')} status="paid"/>
               <TableRow dueDate={new Date('2018, 1, 25')}/>
               <TableRow dueDate={new Date('2018, 1, 26')}/>
-              <TableRow dueDate={new Date('2018, 1, 27')}/>
-              <TableRow dueDate={new Date('2018, 1, 28')}/>
-              <TableRow dueDate={new Date('2018, 1, 29')}/>
+              <TableRow dueDate={new Date('2018, 2, 27')} status="paid"/>
+              <TableRow dueDate={new Date('2018, 12, 28')}/>
+              <TableRow dueDate={new Date('2018, 7, 29')}/>
             </tbody>
           </table>
           </fieldset>
