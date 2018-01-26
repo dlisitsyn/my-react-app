@@ -155,7 +155,7 @@ class Tooltip extends Component {
 
     return (
       <StyledInfoIconWrapper onMouseEnter={this.handleHover}>
-        <StyledInfoIcon src={this.props.image} alt="help"></StyledInfoIcon>
+        <StyledInfoIcon role="tooltip" src={this.props.image} alt="help"></StyledInfoIcon>
         <StyledTooltipText style={{width: this.getTooltipWidth()+'px', transform: transformStyle}} className={"tooltip " + moveXClass + " " + moveYClass}>{this.props.text}</StyledTooltipText>
       </StyledInfoIconWrapper>
     );

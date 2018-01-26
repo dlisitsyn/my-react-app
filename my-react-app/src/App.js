@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 
-import Button from './components/Button';
+//import Button from './components/Button';
 // import LinkButton from './components/LinkButton';
 import TableRow from './components/TableRow';
 import './App.css';
@@ -11,9 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <p className="App-intro">
-          <Button />
-          <br/>
-          <br/>
+          {/*<Button />*/}
         </p>
         <form action="#" method="POST">
           <fieldset>
@@ -30,13 +28,12 @@ class App extends Component {
               </tr>
             </thead>
             <tbody>
-              <TableRow dueDate={Date('January 11, 2018 00:00:00')}/>
-              <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
-              <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
-              <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
-              <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
-              <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
-              <TableRow dueDate={Date('January 17, 2018 00:00:00')}/>
+              <TableRow dueDate={new Date('2018, 1, 24')}/>
+              <TableRow dueDate={new Date('2018, 1, 25')}/>
+              <TableRow dueDate={new Date('2018, 1, 26')}/>
+              <TableRow dueDate={new Date('2018, 1, 27')}/>
+              <TableRow dueDate={new Date('2018, 1, 28')}/>
+              <TableRow dueDate={new Date('2018, 1, 29')}/>
             </tbody>
           </table>
           </fieldset>
